@@ -13,6 +13,7 @@ public class Main extends JComponent
 
 	public static void main(String[] args)
 	{
+		System.out.println("kono michi ya");
 		new Main().getGoing();
 	}
 
