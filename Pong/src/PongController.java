@@ -20,7 +20,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableColumn;
 
-public class Pong extends JComponent implements ActionListener,
+public class PongController extends JComponent implements ActionListener,
 		MouseMotionListener
 {
 	String ballspeed = JOptionPane.showInputDialog("What level do you want?");
@@ -30,24 +30,29 @@ public class Pong extends JComponent implements ActionListener,
 	double paddlespeedy;
 	double oldy;
 	double currenty;
+	Ball ball1;
+	Ball ball2;
 	int x = 44;
 	int y = 4;
 	int score = 0;
 	AudioClip lauging;
-	
-	javax.swing.Timer ticker = new javax.swing.Timer(1, this);
-	Ellipse2D.Double ball = new Ellipse2D.Double(x, y, 90, 90);
+
+	javax.swing.Timer ticker = new javax.swing.Timer(5, this);
 	Rectangle2D.Double paddle = new Rectangle2D.Double(30, y, 10, 70);
 
 	public static void main(String[] args)
 	{
-		Pong ping;
-		ping = new Pong();
+		PongController ping;
+		ping = new PongController();
 		ping.getGoing();
 	}// go back where you came from
 
 	void getGoing()
 	{
+		ball1 = new Ball();
+		ball2 = new Ball();
+		ball1.ballspeedx = level;
+		ball1.ballspeedy = level;
 		JFrame pongTable;
 		pongTable = new JFrame();
 		pongTable.setSize(1250, 780);
@@ -56,7 +61,7 @@ public class Pong extends JComponent implements ActionListener,
 		pongTable.setDefaultCloseOperation(pongTable.EXIT_ON_CLOSE);
 		pongTable.addMouseMotionListener(this);
 		ticker.start();
-		
+
 	} // Go back where you came from
 
 	@Override
@@ -65,57 +70,45 @@ public class Pong extends JComponent implements ActionListener,
 		Graphics2D g2;
 		g2 = (Graphics2D) g;
 		g2.setColor(Color.green);
-		g2.fill(ball);
+		ball1.paintSelf(g2);
+		// g2.fill(ball1);
 		g2.setColor(Color.blue);
 		g2.fill(paddle);
 		g2.setFont(new Font("Bank Gothic", Font.BOLD, 45));
-		g2.drawString( "" + score ,(int) ball.x + 10,(int) ball.y + 65);
-		
+
+		// g2.drawString( "" + score ,(int) ball.x + 10,(int) ball.y + 65);
+
 	} // go back where you came from
 
 	@Override
 	public void actionPerformed(ActionEvent arg0)
 	{
 		repaint();
-		ball.x += ballspeedx;
-		ball.y += ballspeedy;
-		if (ball.y > 700)
+
+		oldy = currenty;
+		currenty = paddle.y;
+
+		paddlespeedy = oldy - currenty;
+
+		if (ball1.ball.intersects(paddle))
 		{
-			ballspeedy = -ballspeedy;
-		}
-		if (ball.x > 1200)
-		{
-			ballspeedx = -ballspeedx;
-		}
-		if (ball.y < 1)
-		{
-			ballspeedy = -ballspeedy;
-		}
+			score = score += 1;
+			ball1.ball.x = 40;
+			ball1.ballspeedx = -ball1.ballspeedx; 
 		
-		
-		if (ball.intersects (paddle))
-		{
-			score = score +=1;
-			ballspeedx = -ballspeedx;
-			ball.x = 40;
-			//ballspeedy = (ballspeedy - paddlespeedy)/10;
+			// ballspeedy = (ballspeedy - paddlespeedy)/10;
 		}
-		if (ball.x < -100){
-			lauging = JApplet.newAudioClip(getClass().getResource("150968__unchaz__laughing-audience.wav"));
+		if (ball1.ball.x < -100)
+		{
+			lauging = JApplet.newAudioClip(getClass().getResource(
+					"150968__unchaz__laughing-audience.wav"));
 			lauging.play();
 			JOptionPane.showMessageDialog(null, "You're fat.");
 			System.exit(0);
 		}
-		oldy = currenty;
-		currenty = paddle.y;
-		
-		paddlespeedy = oldy - currenty ;
-		
-		
-		
-		
-		
-	} // go back where you came from
+	}
+
+	// } // go back where you came from
 
 	@Override
 	public void mouseDragged(MouseEvent arg0)
@@ -127,6 +120,6 @@ public class Pong extends JComponent implements ActionListener,
 	@Override
 	public void mouseMoved(MouseEvent arg0)
 	{
-		paddle.y = arg0.getY();
+		paddle.y = arg0.getY() - 60;
 	}
 }
