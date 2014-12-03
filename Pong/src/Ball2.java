@@ -1,19 +1,13 @@
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 
-public class Ball
+public class Ball2
 {
 	double ballx;
 	double bally;
-	double ballspeedx = 1;
+	double ballspeedx = -1;
 	Ellipse2D.Double ball = new Ellipse2D.Double(ballx, bally, 90, 90);
-	double ballspeedy = 1;
-
-	Ball(double ballx, double bally)
-	{
-		this.ballx = ballx;
-		this.bally = bally;
-	}
+	double ballspeedy = -1;
 
 	void paintSelf(Graphics2D g2)
 	{

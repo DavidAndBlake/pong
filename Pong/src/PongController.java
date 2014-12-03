@@ -49,10 +49,12 @@ public class PongController extends JComponent implements ActionListener,
 
 	void getGoing()
 	{
-		ball1 = new Ball();
-		ball2 = new Ball();
+		ball1 = new Ball(0,0);
+		ball2 = new Ball(800,0);
 		ball1.ballspeedx = level;
 		ball1.ballspeedy = level;
+		ball2.ballspeedx = level;
+		ball2.ballspeedy = level;
 		JFrame pongTable;
 		pongTable = new JFrame();
 		pongTable.setSize(1250, 780);
@@ -72,6 +74,7 @@ public class PongController extends JComponent implements ActionListener,
 		g2.setColor(Color.green);
 		ball1.paintSelf(g2);
 		// g2.fill(ball1);
+		ball2.paintSelf(g2);
 		g2.setColor(Color.blue);
 		g2.fill(paddle);
 		g2.setFont(new Font("Bank Gothic", Font.BOLD, 45));
