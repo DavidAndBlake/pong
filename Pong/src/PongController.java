@@ -49,8 +49,8 @@ public class PongController extends JComponent implements ActionListener,
 
 	void getGoing()
 	{
-		ball1 = new Ball(0,0);
-		ball2 = new Ball(800,0);
+		ball1 = new Ball(90,670);
+		ball2 = new Ball(800,600);
 		ball1.ballspeedx = level;
 		ball1.ballspeedy = level;
 		ball2.ballspeedx = level;
@@ -107,6 +107,24 @@ public class PongController extends JComponent implements ActionListener,
 					"150968__unchaz__laughing-audience.wav"));
 			lauging.play();
 			JOptionPane.showMessageDialog(null, "You're fat.");
+			System.exit(0);
+		}
+		if (ball2.ball.intersects(paddle))
+		{
+			score = score += 1;
+			ball2.setScore(score);
+			ball2.ball.x = 40;
+			ball2.ballspeedx = -ball2.ballspeedx; 
+		
+			// ballspeedy = (ballspeedy - paddlespeedy)/10;
+		}
+		if (ball2.ball.x < -100)
+		{
+			lauging = JApplet.newAudioClip(getClass().getResource(
+					"150968__unchaz__laughing-audience.wav"));
+			lauging.play();
+			JOptionPane.showMessageDialog(null, "You're fat.");
+			lauging.stop();
 			System.exit(0);
 		}
 	}

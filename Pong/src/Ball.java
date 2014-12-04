@@ -1,23 +1,29 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 
 public class Ball
 {
-	double ballx;
-	double bally;
+	int score;
 	double ballspeedx = 1;
-	Ellipse2D.Double ball = new Ellipse2D.Double(ballx, bally, 90, 90);
 	double ballspeedy = 1;
+	Ellipse2D.Double ball;
 
-	Ball(double ballx, double bally)
+	public Ball(double ballx, double bally)
 	{
-		this.ballx = ballx;
-		this.bally = bally;
+		ball = new Ellipse2D.Double(ballx, bally, 90, 90);
+
 	}
 
 	void paintSelf(Graphics2D g2)
 	{
 		g2.fill(ball);
+		g2.setFont(new Font("Bank Gothic", Font.BOLD, 70));
+		g2.setColor(Color.BLACK);
+		g2.drawString("score", (int) ball.x + 14, (int) ball.y + 80);
+		g2.setColor(Color.green);
+
 		ball.x += ballspeedx;
 		ball.y += ballspeedy;
 		if (ball.y > 700)
@@ -32,5 +38,10 @@ public class Ball
 		{
 			ballspeedy = -ballspeedy;
 		}
+	}
+
+	public void setScore(int score)
+	{
+		this.score = score;
 	}
 }
