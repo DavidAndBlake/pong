@@ -34,7 +34,8 @@ public class PongController extends JComponent implements ActionListener,
 	Ball ball2;
 	int x = 44;
 	int y = 4;
-	int score = 0;
+	int score1 = 0;
+	int score2 = 0;
 	AudioClip lauging;
 
 	javax.swing.Timer ticker = new javax.swing.Timer(5, this);
@@ -49,8 +50,8 @@ public class PongController extends JComponent implements ActionListener,
 
 	void getGoing()
 	{
-		ball1 = new Ball(90,670);
-		ball2 = new Ball(800,600);
+		ball1 = new Ball(90, 670);
+		ball2 = new Ball(800, 600);
 		ball1.ballspeedx = level;
 		ball1.ballspeedy = level;
 		ball2.ballspeedx = level;
@@ -95,11 +96,10 @@ public class PongController extends JComponent implements ActionListener,
 
 		if (ball1.ball.intersects(paddle))
 		{
-			score = score += 1;
+			score1 = score1 += 1;
+			ball1.setScore(score1);
 			ball1.ball.x = 40;
-			ball1.ballspeedx = -ball1.ballspeedx; 
-		
-			// ballspeedy = (ballspeedy - paddlespeedy)/10;
+			ball1.ballspeedx = -ball1.ballspeedx;
 		}
 		if (ball1.ball.x < -100)
 		{
@@ -111,12 +111,10 @@ public class PongController extends JComponent implements ActionListener,
 		}
 		if (ball2.ball.intersects(paddle))
 		{
-			score = score += 1;
-			ball2.setScore(score);
+			score2 = score2 += 1;
+			ball2.setScore(score1);
 			ball2.ball.x = 40;
-			ball2.ballspeedx = -ball2.ballspeedx; 
-		
-			// ballspeedy = (ballspeedy - paddlespeedy)/10;
+			ball2.ballspeedx = -ball2.ballspeedx;
 		}
 		if (ball2.ball.x < -100)
 		{
@@ -134,8 +132,6 @@ public class PongController extends JComponent implements ActionListener,
 	@Override
 	public void mouseDragged(MouseEvent arg0)
 	{
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

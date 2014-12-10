@@ -21,7 +21,7 @@ public class Ball
 		g2.fill(ball);
 		g2.setFont(new Font("Bank Gothic", Font.BOLD, 70));
 		g2.setColor(Color.BLACK);
-		g2.drawString("score", (int) ball.x + 14, (int) ball.y + 80);
+		g2.drawString("" + score, (int) ball.x + 14, (int) ball.y + 80);
 		g2.setColor(Color.green);
 
 		ball.x += ballspeedx;
