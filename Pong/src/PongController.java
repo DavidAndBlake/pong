@@ -50,8 +50,8 @@ public class PongController extends JComponent implements ActionListener,
 
 	void getGoing()
 	{
-		ball1 = new Ball(90, 670);
-		ball2 = new Ball(800, 600);
+		ball1 = new Ball(90, 670, Color.red);
+		ball2 = new Ball(800, 600, Color.blue);
 		ball1.ballspeedx = level;
 		ball1.ballspeedy = level;
 		ball2.ballspeedx = level;
@@ -74,14 +74,10 @@ public class PongController extends JComponent implements ActionListener,
 		g2 = (Graphics2D) g;
 		g2.setColor(Color.green);
 		ball1.paintSelf(g2);
-		// g2.fill(ball1);
 		ball2.paintSelf(g2);
 		g2.setColor(Color.blue);
 		g2.fill(paddle);
 		g2.setFont(new Font("Bank Gothic", Font.BOLD, 45));
-
-		// g2.drawString( "" + score ,(int) ball.x + 10,(int) ball.y + 65);
-
 	} // go back where you came from
 
 	@Override
@@ -115,6 +111,9 @@ public class PongController extends JComponent implements ActionListener,
 			ball2.setScore(score1);
 			ball2.ball.x = 40;
 			ball2.ballspeedx = -ball2.ballspeedx;
+			ballspeedx = ballspeedx + 1;
+			ballspeedy = ballspeedy + 1;
+
 		}
 		if (ball2.ball.x < -100)
 		{
