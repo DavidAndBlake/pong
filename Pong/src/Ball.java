@@ -44,4 +44,9 @@ public class Ball
 	{
 		this.score = score;
 	}
+	public void setBallSpeed(double ballSpeed)
+	{
+		ballspeedx = ballSpeed;
+		ballspeedy = ballSpeed;
+	}
 }

@@ -27,6 +27,8 @@ public class PongController extends JComponent implements ActionListener,
 	int level = Integer.parseInt(ballspeed);
 	double ballspeedy = level;
 	double ballspeedx = level;
+	double ball1Speed = level;
+	double ball2Speed = level;
 	double paddlespeedy;
 	double oldy;
 	double currenty;
@@ -52,10 +54,8 @@ public class PongController extends JComponent implements ActionListener,
 	{
 		ball1 = new Ball(90, 670, Color.red);
 		ball2 = new Ball(800, 600, Color.blue);
-		ball1.ballspeedx = level;
-		ball1.ballspeedy = level;
-		ball2.ballspeedx = level;
-		ball2.ballspeedy = level;
+		ball1.setBallSpeed(level);
+		ball2.setBallSpeed(level);
 		JFrame pongTable;
 		pongTable = new JFrame();
 		pongTable.setSize(1250, 780);
@@ -78,17 +78,16 @@ public class PongController extends JComponent implements ActionListener,
 		g2.setColor(Color.blue);
 		g2.fill(paddle);
 		g2.setFont(new Font("Bank Gothic", Font.BOLD, 45));
+		g2.setColor(Color.black);
+		g2.drawRect(1050, 13, 300, 60);
+		g2.setFont(new Font("Bank Gothic", Font.BOLD, 50));
+		g2.drawString("" + (score1 + score2), 1060, 60);
 	} // go back where you came from
 
 	@Override
 	public void actionPerformed(ActionEvent arg0)
 	{
 		repaint();
-
-		oldy = currenty;
-		currenty = paddle.y;
-
-		paddlespeedy = oldy - currenty;
 
 		if (ball1.ball.intersects(paddle))
 		{
@@ -108,7 +107,7 @@ public class PongController extends JComponent implements ActionListener,
 		if (ball2.ball.intersects(paddle))
 		{
 			score2 = score2 += 1;
-			ball2.setScore(score1);
+			ball2.setScore(score2);
 			ball2.ball.x = 40;
 			ball2.ballspeedx = -ball2.ballspeedx;
 			ballspeedx = ballspeedx + 1;
